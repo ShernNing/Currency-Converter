@@ -14,8 +14,8 @@ function App() {
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true)
 
   let toAmount, fromAmount
-  if (amountInFromCurrency) { 
-    fromAmount = amount 
+  if (amountInFromCurrency) {
+    fromAmount = amount
     toAmount = amount * exchangeRate
   } else {
     toAmount = amount
@@ -26,8 +26,8 @@ function App() {
     fetch(BASE_URL)
       .then(res => res.json()) //convert response to json
       .then(data => {
-        //will select the first currency after base currency
-        const firstCurrency = Object.keys(data.rates)[0]
+        //will select the 101 currency after base currency
+        const firstCurrency = Object.keys(data.rates)[101] //101 is MYR
         setCurrencyOptions([data.base, ...Object.keys(data.rates)])
         //from currency is always the base when loaded
         setFromCurrency(data.base)
@@ -38,11 +38,11 @@ function App() {
 
   useEffect(() => {
     //only if fromCurrency and toCurrency != null then run this effect
-    if (fromCurrency != null && toCurrency != null) { 
+    if (fromCurrency != null && toCurrency != null) {
       //fetch from base url and pass in parameter of base = fromCurrency
       fetch(`${BASE_URL}?base=${fromCurrency}&symbols=${toCurrency}`)
         .then(res => res.json()) //convert response to json
-        //set exchangerate to toCurrency. When we update our currencies, 
+        //set exchangerate to toCurrency. When we update our currencies,
         //it will go to this api and get the new exchange for fromCurrency or toCurrency
         .then(data => setExchangeRate(data.rates[toCurrency]))
     }

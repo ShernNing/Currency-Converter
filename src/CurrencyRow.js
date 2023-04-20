@@ -11,7 +11,7 @@ export default function CurrencyRow(props) {
         onChange={props.onChangeCurrency}>
         {props.currencyOptions.map(option => (
           //each child in a list must have a unique key prop
-          <option key={option} value={option}>{option}</option> 
+          <option key={option} value={option}>{option}</option>
         ))}
       </select>
     </div>
